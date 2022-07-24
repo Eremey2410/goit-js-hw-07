@@ -7,7 +7,7 @@ galleryEl.insertAdjacentHTML("beforeend", galleryMarcup);
 
 galleryEl.addEventListener("click", onNewGalleryClick);
 
-console.log(createGalleryItemsMarkup(galleryItems));
+// console.log(createGalleryItemsMarkup(galleryItems));
 function createGalleryItemsMarkup(galleryItems) {
   return galleryItems
     .map(({ preview, original, description }) => {
@@ -30,11 +30,18 @@ function createGalleryItemsMarkup(galleryItems) {
 function onNewGalleryClick(event) {
   event.preventDefault();
   console.log(event.target.dataset.source);
+  window.addEventListener("keydown", onKeydownPress);
 
   const instance = basicLightbox.create(`
     <img src="${event.target.dataset.source}" width="800" height="600"/>
 `);
   instance.show();
+  function onKeydownPress(e) {
+    if (e.code === "Escape") {
+      instance.close();
+    }
+    console.log(e);
+  }
 }
 
-console.log(galleryItems);
+// console.log(galleryItems);

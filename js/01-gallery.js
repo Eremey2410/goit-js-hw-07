@@ -5,7 +5,7 @@ const galleryMarcup = createGalleryItemsMarkup(galleryItems);
 
 galleryEl.insertAdjacentHTML("beforeend", galleryMarcup);
 
-galleryEl.addEventListener("click", onNewGalleryClick);
+galleryEl.addEventListener("click", onImgClick);
 
 // console.log(createGalleryItemsMarkup(galleryItems));
 function createGalleryItemsMarkup(galleryItems) {
@@ -27,7 +27,7 @@ function createGalleryItemsMarkup(galleryItems) {
     .join("");
 }
 
-function onNewGalleryClick(event) {
+function onImgClick(event) {
   event.preventDefault();
   console.log(event.target.dataset.source);
   window.addEventListener("keydown", onKeydownPress);
@@ -39,6 +39,7 @@ function onNewGalleryClick(event) {
   function onKeydownPress(e) {
     if (e.code === "Escape") {
       instance.close();
+      window.removeEventListener("keydown", onKeydownPress);
     }
     console.log(e);
   }

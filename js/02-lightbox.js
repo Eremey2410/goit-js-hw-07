@@ -6,8 +6,6 @@ const galleryMarcup = createGalleryItemsMarkup(galleryItems);
 
 galleryEl.insertAdjacentHTML("beforeend", galleryMarcup);
 
-galleryEl.addEventListener("click", onImgClick);
-
 // console.log(createGalleryItemsMarkup(galleryItems));
 function createGalleryItemsMarkup(galleryItems) {
   return galleryItems
@@ -30,10 +28,3 @@ var lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 250,
 });
-function onImgClick(event) {
-  event.preventDefault();
-
-  console.log(event);
-}
-
-console.log(galleryItems);

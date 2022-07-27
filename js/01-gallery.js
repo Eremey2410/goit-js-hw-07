@@ -32,14 +32,21 @@ function onImgClick(event) {
   console.log(event.target.dataset.source);
   window.addEventListener("keydown", onKeydownPress);
 
-  const instance = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" width="800" height="600"/>
-`);
+  const instance = basicLightbox.create(
+    `<img src="${event.target.dataset.source}" width="800" height="600"/>`,
+    {
+      onShow: (instance) => {
+        window.addEventListener("keydown", onKeydownPress);
+      },
+      onClose: (instance) => {
+        window.removeEventListener("keydown", onKeydownPress);
+      },
+    }
+  );
   instance.show();
   function onKeydownPress(e) {
     if (e.code === "Escape") {
       instance.close();
-      window.removeEventListener("keydown", onKeydownPress);
     }
     console.log(e);
   }
